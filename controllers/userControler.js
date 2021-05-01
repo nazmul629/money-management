@@ -55,10 +55,6 @@ module.exports = {
     },
     
 
-        
-
-    
-
     register(req, res){
         let {name,email,password, confirmPassword} = req.body
         
