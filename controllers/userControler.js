@@ -78,7 +78,11 @@ module.exports = {
                 let user = new User({
                     name,
                     email,
-                    password:hash
+                    password:hash,
+                    balance:0,
+                    income:0, 
+                    expense:0,
+                    transactions:[]
                 })
 
                 user.save()
@@ -98,5 +102,13 @@ module.exports = {
 
            .catch( error => serverError(res,error))
         }
+    },
+    allUsers(req,res){
+        User.find()
+        .then(users => {
+            res.status(200).json(users)
+            
+        })
+        .catch(error=>serverError(res.error))
     }
 }
