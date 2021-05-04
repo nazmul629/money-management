@@ -63,20 +63,17 @@ module.exports ={
 
     getAll(req,res){
         
-        // res.status(200).json({
-            // message: "Hi"
-        // })
         
         let{_id} = req.user
         Transaction.find({author:_id})
-        .then(transaction => {
-            if(transaction.length ===0){
+        .then(transactions => {
+            if(transactions.length ===0){
                 res.status(200).json({
                     message:'No transaction Found'
                 })
             }
             else{
-                res.status(200).json(transaction)
+                res.status(200).json(transactions)
             }
         })
         .catch( error => serverError(res,error))
@@ -88,13 +85,13 @@ module.exports ={
 
         Transaction.findById(transactionId) 
 
-        .then( transaction => {
-            if(!transaction){
+        .then( transactions => {
+            if(!transactions){
                 res.status(200).json({
                     message: 'No Transaction Found'
                 })
             } else{
-                res.status(200).json(transaction)
+                res.status(200).json(transactions)
             }
         })
         .catch(error => serverError(res,error))
